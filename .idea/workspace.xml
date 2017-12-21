@@ -92,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="48">
-              <caret line="2" column="64" lean-forward="true" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+              <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -552,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513835392221</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix kugou can't play bugs &amp; md">
+      <created>1513836769855</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1513836769855</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -965,7 +972,7 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
-          <caret line="2" column="64" lean-forward="true" selection-start-line="2" selection-start-column="64" selection-end-line="2" selection-end-column="64" />
+          <caret line="2" column="2" lean-forward="false" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
           <folding />
         </state>
       </provider>

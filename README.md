@@ -1,6 +1,6 @@
 # HTML5MyMusicHome
 
-由于采用了部分采用javascript es6语法和css3的新特性，在IE上工作会不正常，火狐未测试，建议使用最新chrome。
+由于采用了部分采用javascript es6语法和css3的新特性，在IE上工作会不正常，火狐未测试，建议使用最新chrome
 
 ## 项目介绍
 

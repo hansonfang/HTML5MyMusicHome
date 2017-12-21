@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">
+        我的音乐小屋
+    </a>
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-2">
+            <li class="nav-item">
+
+                <a class="nav-link" href="/">发现音乐</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/mymusic">我的音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/messageboard">小站留言</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">联系我们</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0 mr-lg-5">
+        <input id="searchSongInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <% if(!user){ %>
+    <div class="nav-item">
+        <button class="loginBtn btn btn-success" type="button" data-toggle="modal">
+            登录
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="signUpBtn" class="btn btn-outline-info" type="button" data-toggle="modal"
+                data-target="#signupModal">注册
+        </button>
+    </div>
+    <% }else { %>
+    <div class="nav-item">
+        <span class="text-white">欢迎 <%= user.username %>!</span>
+    </div>
+    <% } %>
+</nav>
+
+<!--personal data area-->
+<div class="container-fluid mr-lg-5 ml-lg-5 mr-top-2 mx-width-100 pl-lg-5 pr-lg-5 pt-lg-5">
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list"
+                   href="#list-profile" role="tab" aria-controls="profile">profile</a>
+                <a class="list-group-item list-group-item-action" id="list-favorite-list" data-toggle="list"
+                   href="#list-favorite" role="tab" aria-controls="favorite">My favorite</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="tab-content" id="nav-tabContent">
+                <div id="welcome" class="container-fluid">
+                    <div class="row justify-content-center"><h2 class=" text-center">欢迎Hanson！</h2></div>
+                </div>
+
+                <!--profile-->
+                <div class="tab-pane active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <form>
+                        <div class="form-group row">
+                            <label for="userName" class="col-sm-2 col-form-label text-right">用户名:</label>
+                            <div class="col-sm-4">
+                                <input type="text" readonly class="form-control-plaintext" id="userName"
+                                       value="<%= user.username %>">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label for="inputPassword" class="col-sm-2 col-form-label text-right">密码:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" id="inputPassword" readonly
+                                       value="000000000">
+                            </div>
+                            <i id="modifyPassword" class="fa fa-pencil-square-o fa-2x text-secondary"></i>
+                        </div>
+                        <div id="confirm" class="form-group row hide align-items-center">
+                            <label for="confirmInputPassword" class="col-sm-2 col-form-label text-right">确认密码:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" id="confirmInputPassword">
+                            </div>
+
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <h5 id="passwordHelper" class="hide d-inline-flex text-center"></h5>
+                        </div>
+                        <div id="newPassword" class="form-group row  hide">
+                            <label for="newInputPassword" class="col-sm-2 col-form-label text-right">新密码:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" id="newInputPassword">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <button id="modifypwbtn" class="btn btn-outline-info hide">确定</button>
+                            <button id="commitNewPwbtn" class="btn btn-outline-info hide">提交</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!--my favorite-->
+                <div class="tab-pane fade" id="list-favorite" role="tabpanel" aria-labelledby="list-messages-list">
+                    <div class="card-deck">
+                        <div id="kugouCard" class="card border-primary">
+                            <div class="card-header d-flex justify-content-center">
+                                <a class="nav-link active" id="kugou-tab" data-toggle="tab" href="" role="tab"
+                                   aria-controls="home"
+                                   aria-selected="true">
+                                    <img src="/assets/image/cardlkg80x80.png" alt="">酷狗音乐</a>
+                            </div>
+                            <div class="card-body text-primary">
+                                <ul class="list-group list-group-flush">
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="neteaseCard" class="card border-danger">
+                            <div class="card-header d-flex justify-content-center">
+                                <a class="nav-link text-red" id="netease-tab" data-toggle="tab" href="" role="tab"
+                                   aria-controls="profile"
+                                   aria-selected="false">
+                                    <img src="/assets/image/cardNete80x80.png" alt="">网易云音乐</a>
+                            </div>
+                            <div class="card-body text-danger">
+                                <ul class="list-group list-group-flush">
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="qqmusicCard" class="card border-success">
+                            <div class="card-header d-flex justify-content-center">
+                                <a class="nav-link text-green" id="qqmusic-tab" data-toggle="tab" href="" role="tab"
+                                   aria-controls="contact"
+                                   aria-selected="false">
+                                    <img src="/assets/image/cardqq80x80.png" alt="">QQ音乐</a>
+                            </div>
+                            <div class="card-body text-success">
+                                <ul class="list-group list-group-flush">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-remarks" role="tabpanel" aria-labelledby="list-settings-list">
+                    remarks
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--playBar-->
+<div class="wrap">
+
+    <div class="player paused">
+
+        <div class="progress-bar">
+            <div class="runner"></div>
+        </div>
+        <div class="album-art">
+            <div class="cover"></div>
+        </div>
+
+        <div class="description">
+            <div class="title">Something from nothing</div>
+        </div>
+
+        <div class="visualizer">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="play-button">
+            <div class="lp-background"></div>
+            <i class="fa fa-play"></i>
+        </div>
+
+        <div class="time-indicator">
+            <i class="fa fa-clock-o"></i>
+            <span id="current">00:00</span>
+        </div>
+        <div class="time-end-indicator">
+            <i class="fa fa-clock-o"></i>
+            <span id="duration">00:00</span>
+        </div>
+
+    </div>
+
+</div>
+<div class="mb-footer"></div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<script>
+    function validatePassword(str) {
+        var regNumber = /\d+/;
+        var regString = /[a-zA-Z]+/;
+        var matAlpha = regNumber.test(str);
+        var matNum = regString.test(str);
+        return matNum && matAlpha;
+    }
+
+    const $password = $("#inputPassword");
+    const $confirmPassword = $("#confirmInputPassword");
+    const $newInputPassword = $("#newInputPassword");
+    const $newPassword = $("#newPassword");
+    const $confirm = $("#confirm");
+    const $passwordHelper = $("#passwordHelper");
+    const $modifybtn = $("#modifypwbtn");
+    const $commitNewPwbtn = $("#commitNewPwbtn");
+    const $listFavoriteList = $("#list-favorite-list");
+    const kugouCard = $("#kugouCard");
+    const neteaseCard = $("#neteaseCard");
+    const qqmusicCard = $("#qqmusicCard");
+
+    $modifybtn.click(function (e) {
+        e.preventDefault();
+        if (validatePassword($password.val()) && validatePassword($confirmPassword.val()) && ($password.val() === $confirmPassword.val())) {
+            console.log("验证成功!");
+            $.ajax({
+                url: "/validateOldPw",
+                type: "post",
+                data: {password: $password.val()},
+                dataType: "json",
+                success: function (data) {
+                    if (data.info === "success") {
+                        $passwordHelper.removeClass("text-danger").addClass("text-success").text("验证成功,请输入新密码");
+                        $confirm.css("display", "none");
+                        $newPassword.css("display", "flex");
+                        $modifybtn.css("display", "none");
+                        $commitNewPwbtn.css("display", "inline-flex");
+                    } else if (data.info === "wrong") {
+                        $passwordHelper.addClass("text-danger").text("旧密码不正确");
+                    } else {
+                        $passwordHelper.addClass("text-danger").text("数据库内部错误");
+
+                    }
+                }
+            })
+
+
+        } else {
+            console.log("验证不成功!");
+            $passwordHelper.removeClass("hide").addClass("text-danger").text("两次密码不一致或不符合密码要求!");
+        }
+    })
+    $commitNewPwbtn.click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "/modifyPassword",
+            type: "post",
+            data: {password: $newInputPassword.val()},
+            success: function (data) {
+                if (data.info === "success") {
+                    $passwordHelper.text("修改成功即将跳转登录页面!");
+                    setTimeout(function () {
+                        window.location = "/login";
+                    }, 3000)
+                } else {
+                    $passwordHelper.addClass("text-danger").text("失败");
+                }
+            }
+        })
+    })
+    $("#modifyPassword").click(function () {
+        $password.val("");
+        $password.attr("readonly", false);
+        $confirm.css("display", "flex");
+        $modifybtn.css("display", "inline-block");
+    });
+
+    $(".list-group-item-action").click(function () {
+        $("#welcome").hide();
+    })
+
+    $listFavoriteList.click(function () {
+        $(".card-body").find("ul").text("");
+        $.ajax({
+            url: "/mymusic",
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                if (data.info === "fail") {
+                    $("#list-favorite").html(`<h2>获取失败！</h2>`);
+                } else {
+                    let cardBody = null;
+                    data.result.forEach(function (item) {
+                        switch (item.source) {
+                            case 1:
+                                cardBody = kugouCard.find(".card-body>ul");
+                                break;
+                            case 2:
+                                cardBody = neteaseCard.find(".card-body>ul");
+                                break;
+                            case 3:
+                                cardBody = qqmusicCard.find(".card-body>ul");
+                                break;
+                        }
+                        cardBody.append(`<li class="list-group-item">${item.songname}<span class="text-hide id">${item.songid}</span> <span class="text-hide duration">${item.duration}</span></li>`);
+                    })
+                }
+                kugouCard.find("li").click(function () {
+                    PlayMusic($(this).children(".id").text(), null, null, this);
+                })
+                neteaseCard.find("li").click(function () {
+                    PlayMusic(null, $(this).children(".id").text(), null, this);
+                })
+                qqmusicCard.find("li").click(function () {
+                    PlayMusic(null, null, $(this).children(".id").text(), this);
+                })
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">
+        我的音乐小屋
+    </a>
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-2">
+            <li class="nav-item">
+
+                <a class="nav-link" href="/">发现音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mymusic">我的音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/messageboard">小站留言</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">联系我们</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0 mr-lg-5">
+        <input id="searchSongInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <% if(!user){ %>
+    <div class="nav-item">
+        <button class="loginBtn btn btn-success" type="button" data-toggle="modal">
+            登录
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="signUpBtn" class="btn btn-outline-info" type="button" data-toggle="modal"
+                data-target="#signupModal">注册
+        </button>
+    </div>
+    <% }else { %>
+    <div class="nav-item">
+        <span class="text-white">欢迎 <%= user.username %>!</span>
+    </div>
+    <% } %>
+</nav>
+
+<div class="container h-100 ">
+    <div class="row h-100 align-items-center">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="container-fluid p-3 p-md-5">
+                    <ul class="bd-footer-links">
+                        <li><a class="text-dark" href="https://github.com/hansonfang/HTML5MyMusicHome"
+                               target="_blank">GitHub</a>
+                        </li>
+                    </ul>
+                    <p>Designed and built with all the love in the world by
+                        <a href="https://weibo.com/u/2448754637/" target="_blank">@Hanson(房晓松)</a> and
+                        <a href="https://weibo.com/p/1005055798272977" target="_blank">@YangKai(杨凯)</a>. beautified by the
+                        <a href="https://weibo.com/u/5793910591" target="_blank">@刘方正</a> with the help of
+                        <a href="https://weibo.com/u/5029317255" target="_blank">@金航</a>.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<div class="mb-footer"></div>
+
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+
+</body>
+</html>

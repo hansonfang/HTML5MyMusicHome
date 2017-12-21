@@ -1,0 +1,629 @@
+
+html{
+    display: block;
+    width:100%;
+}
+body{
+    position: absolute;
+    opacity: 1;
+    width:100%;
+    height:100%;
+}
+.navbar-dark{
+    background: black;
+}
+.carousel-control-icon{
+ width:40px;
+    height: 40px;
+}
+
+.carousel-item{
+    cursor: pointer;
+}
+.navbar-collapse{
+    align-items: center;
+    justify-content: center;
+}
+li.nav-item{
+    margin:0 1rem;
+}
+.navbar li.nav-item:hover{
+    border-bottom: 1px solid chocolate;
+}
+.active{
+    border-bottom: 1px solid white;
+}
+#explore-nav{
+    justify-content: center;
+}
+.mr-top-2{
+    margin-top: 2rem;
+}
+.nav-pills a.active{
+    border-radius: 2rem;
+
+}
+#cardContainer{
+    position: relative;
+    top:-2px;
+    background-color: white;
+    padding:2rem 0 .5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 2rem ;
+}
+.card-body-detail{
+    min-height: 10rem;
+}
+.list-group,.list-group-item{
+    background: transparent;
+}
+
+#explore-card .card{
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 300ms;
+}
+#explore-card .card:hover{
+    box-shadow: 0 0 2rem #aaaaaa;
+}
+#explore-card .card:before{
+    content:"";
+    position: absolute;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    opacity: .2;
+    z-index: -1;
+    background-clip:padding-box;
+    background-position: center;
+    background-size: contain;
+}
+
+#cardkugou:before{
+    background:url("../image/cardlk2.png") no-repeat;
+}
+#cardnetease:before{
+    background:url("../image/cardNete.png") no-repeat;
+}
+#cardqqmusic:before{
+    background:url("../image/cardQQ.png") no-repeat;
+}
+.bd-footer{
+    background-color: #f3f3f3;
+    width:100%;
+}
+.bd-footer-links{
+    list-style: none;
+    color:#575c5d;
+    padding:0;
+}
+.bd-footer-links li{
+    display: inline-block;
+}
+/*playbar style below*/
+#playBar{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    height:4rem;
+    width:100%;
+    /*margin:0 5rem;*/
+    background-color: black;
+    z-index: 99;
+}
+#playBar input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    justify-items: end;
+}
+#playBar input[type=range]:focus {
+    outline: none;
+}
+#playBar input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 15px;
+    background: #388bda;
+    border: solid 0.125em #388bda; /*设置边框*/
+}
+#playBar i:hover,#playBar input[type='range']{
+    cursor: pointer;
+    text-shadow: 0 0 1rem #8BCDDA;
+}
+
+#play{
+    transition: text-shadow 400ms;
+}
+/*playbar style end*/
+#loginBtnSubmit{
+    width:20%;
+}
+#explore-card li{
+    cursor: pointer;
+    transition:all .12s ease-in-out;
+}
+#explore-card li:hover{
+    border-bottom: none;
+    transform: scale(1.1);
+}
+#explore-card #cardkugou li:hover{
+    background: #9cdbff;
+    box-shadow: 0 0 1rem #9cdbff;
+}
+#explore-card #cardnetease li:hover{
+    background: #ff8e89;
+    box-shadow: 0 0 1rem #ff8e89;
+
+}
+#explore-card #cardqqmusic li:hover{
+    background: #ffe5a7;
+    box-shadow: 0 0 1rem #ffe5a7;
+}
+/*
+playbar
+*/
+
+.wrap {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: #d7d7d7;
+    text-align: center;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+
+.wrap body a:hover{
+    text-shadow: 1px 1px 5px #000000;
+}
+body .player, html .player {
+    margin-top: 50px;
+    width: 100%;
+    height: 75px;
+    background: #f3f3f3;
+    border-bottom: 4px #ccc solid;
+    position: relative;
+    color: black;
+    text-align: left;
+    text-shadow: none;
+}
+body .player .album-art, html .player .album-art {
+    position: absolute;
+    left: 9%;
+    width: 75px;
+    height: 100%;
+    box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.4);
+    padding: 5px;
+}
+body .player .album-art .cover, html .player .album-art .cover {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.25);
+    background: url("https://upload.wikimedia.org/wikipedia/en/6/67/Foo_Fighters_8LP_Sonic_Highways.jpg");
+    background-size: cover;
+}
+body .player .description, html .player .description {
+    position: relative;
+    width: 60%;
+    height: 50px;
+    left: 20%;
+}
+body .player .description .title, html .player .description .title {
+    color: black;
+    font-size: 24px;
+    font-weight: 100;
+}
+body .player .description .sub-title, html .player .description .sub-title {
+    font-size: 13px;
+    font-weight: 100;
+    color: #999;
+}
+body .player .play-button, html .player .play-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    right: 10%;
+    border-radius: 50%;
+    top: -25px;
+    background: white;
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.35);
+    text-align: center;
+    line-height: 57px;
+    font-size: 26px;
+    color: #D32F2F;
+    cursor: pointer;
+}
+body .player .play-button .lp-background, html .player .play-button .lp-background {
+    transition: all 0.35s ease;
+    background: url("../image/disc.png");
+    background-size: cover;
+    animation: spin 1s infinite linear;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+}
+body .player .play-button i, html .player .play-button i {
+    z-index: 100;
+}
+body .player .play-button .mdi-pause, html .player .play-button .mdi-pause {
+    z-index: 100;
+    position: absolute;
+    right: 17.5px;
+    top: 17.4px;
+    color: white;
+    font-size: 20px;
+}
+body .player .play-button:hover, html .player .play-button:hover {
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.5);
+}
+body .player .time-indicator, html .player .time-indicator {
+    position: absolute;
+    left: 0;
+    top: 65%;
+    font-size: 13px;
+    font-weight: 100;
+}
+.time-end-indicator{
+    position: absolute;
+    right: 2%;
+    top:50%;
+    font-size: 13px;
+    font-weight: 100;
+}
+body .player .time-indicator i, html .player .time-end-indicator i {
+    color: #D32F2F;
+}
+body .player .progress-bar, html .player .progress-bar {
+    width: 100%;
+    top: 100%;
+    opacity: 0;
+    height: 0;
+    position: absolute;
+    cursor: pointer;
+}
+body .player .progress-bar .runner, html .player .progress-bar .runner {
+    height: 6px;
+    background: #F44336;
+    position: absolute;
+    left: 0;
+}
+body .player .visualizer, html .player .visualizer {
+    position: absolute;
+    top: 25%;
+    left: 37.5%;
+    width: 0%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+body .player .visualizer div, html .player .visualizer div {
+    width: 2px;
+    background: #F44336;
+    float: left;
+    height: 0%;
+    margin-right: 5px;
+    transition: all 0.1s ease;
+}
+body .player.paused, html .player.paused {
+    border-bottom: none;
+}
+body .player.paused .visualizer, html .player.paused .visualizer {
+    opacity: 0;
+}
+body .player.paused .lp-background, html .player.paused .lp-background {
+    opacity: 0;
+}
+body .player.paused .play-button .mdi-pause, html .player.paused .play-button .mdi-pause {
+    opacity: 0;
+}
+body .player.playing .description, html .player.playing .description {
+    /*opacity: 0;*/
+    left:40%;
+}
+body .player.playing .album-art, html .player.playing .album-art {
+    width: 0px;
+    opacity: 0;
+}
+body .player.playing .visualizer, html .player.playing .visualizer {
+    left: 5%;
+    width: 65%;
+}
+body .player.playing .progress-bar, html .player.playing .progress-bar {
+    height: 4px;
+    margin: 0;
+    opacity: 1;
+}
+/*body .player.playing .description, html .player.playing .description {
+    left: 0%;
+    opacity: 0;
+}*/
+body .player.playing .play-button, html .player.playing .play-button {
+    background: transparent;
+}
+body .player.playing .play-button .mdi-play, html .player.playing .play-button .mdi-play {
+    opacity: 0;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.text-red{
+    color:red!important;
+}
+.text-green{
+    color: green;!important;
+}
+#search-nav img{
+    width:30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+
+/*loading*/
+.loading {
+    position: absolute;
+    background: rgba(255,255,255,0.5);
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+}
+
+.blob {
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 50%;
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: calc(50% - 1rem);
+    -webkit-box-shadow: 0 0 1rem rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 1rem rgba(255, 255, 255, 0.25);
+}
+
+.blob-2 {
+    -webkit-animation: animate-to-2 1.5s infinite;
+    animation: animate-to-2 1.5s infinite;
+}
+
+.blob-3 {
+    -webkit-animation: animate-to-3 1.5s infinite;
+    animation: animate-to-3 1.5s infinite;
+}
+
+.blob-1 {
+    -webkit-animation: animate-to-1 1.5s infinite;
+    animation: animate-to-1 1.5s infinite;
+}
+
+.blob-4 {
+    -webkit-animation: animate-to-4 1.5s infinite;
+    animation: animate-to-4 1.5s infinite;
+}
+
+.blob-0 {
+    -webkit-animation: animate-to-0 1.5s infinite;
+    animation: animate-to-0 1.5s infinite;
+}
+
+.blob-5 {
+    -webkit-animation: animate-to-5 1.5s infinite;
+    animation: animate-to-5 1.5s infinite;
+}
+
+@-webkit-keyframes animate-to-2 {
+    25%, 75% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-2 {
+    25%, 75% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@-webkit-keyframes animate-to-3 {
+    25%, 75% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-3 {
+    25%, 75% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@-webkit-keyframes animate-to-1 {
+    25% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    50%, 75% {
+        -webkit-transform: translateX(-4.5rem) scale(0.6);
+        transform: translateX(-4.5rem) scale(0.6);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-1 {
+    25% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    50%, 75% {
+        -webkit-transform: translateX(-4.5rem) scale(0.6);
+        transform: translateX(-4.5rem) scale(0.6);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@-webkit-keyframes animate-to-4 {
+    25% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    50%, 75% {
+        -webkit-transform: translateX(4.5rem) scale(0.6);
+        transform: translateX(4.5rem) scale(0.6);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-4 {
+    25% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    50%, 75% {
+        -webkit-transform: translateX(4.5rem) scale(0.6);
+        transform: translateX(4.5rem) scale(0.6);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@-webkit-keyframes animate-to-0 {
+    25% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    50% {
+        -webkit-transform: translateX(-4.5rem) scale(0.6);
+        transform: translateX(-4.5rem) scale(0.6);
+    }
+    75% {
+        -webkit-transform: translateX(-7.5rem) scale(0.5);
+        transform: translateX(-7.5rem) scale(0.5);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-0 {
+    25% {
+        -webkit-transform: translateX(-1.5rem) scale(0.75);
+        transform: translateX(-1.5rem) scale(0.75);
+    }
+    50% {
+        -webkit-transform: translateX(-4.5rem) scale(0.6);
+        transform: translateX(-4.5rem) scale(0.6);
+    }
+    75% {
+        -webkit-transform: translateX(-7.5rem) scale(0.5);
+        transform: translateX(-7.5rem) scale(0.5);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@-webkit-keyframes animate-to-5 {
+    25% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    50% {
+        -webkit-transform: translateX(4.5rem) scale(0.6);
+        transform: translateX(4.5rem) scale(0.6);
+    }
+    75% {
+        -webkit-transform: translateX(7.5rem) scale(0.5);
+        transform: translateX(7.5rem) scale(0.5);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+
+@keyframes animate-to-5 {
+    25% {
+        -webkit-transform: translateX(1.5rem) scale(0.75);
+        transform: translateX(1.5rem) scale(0.75);
+    }
+    50% {
+        -webkit-transform: translateX(4.5rem) scale(0.6);
+        transform: translateX(4.5rem) scale(0.6);
+    }
+    75% {
+        -webkit-transform: translateX(7.5rem) scale(0.5);
+        transform: translateX(7.5rem) scale(0.5);
+    }
+    95% {
+        -webkit-transform: translateX(0rem) scale(1);
+        transform: translateX(0rem) scale(1);
+    }
+}
+.song-name, #modifyPassword{
+    cursor: pointer;
+}
+.hide{
+    display: none;
+}
+.mx-width-100{
+    width:90%;
+}
+.mb-footer{
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+.nav-link img{
+    width:30px;
+    height: 30px;
+}
+.list-group-item:hover{
+    background: #d4dada;
+    cursor: pointer;
+}

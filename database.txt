@@ -1,0 +1,26 @@
+﻿create table users(
+id int auto_increment primary key not null,
+username varchar(100) not null,
+password varchar(200) not null
+);
+
+create table songs(
+id varchar(100) primary key,
+songname varchar(100) not null,
+duration varchar(20) not null,
+source int not null
+);
+
+create table userandsongs(
+id int auto_increment primary key,
+songid varchar(100) not null,
+userid int not null
+);
+
+create table remarks(
+id int auto_increment primary key,
+message varchar(200) not null,
+messageTime timestamp default current_timestamp on update current_timestamp,
+leaveuserid int,
+leaveusername varchar(20)
+);

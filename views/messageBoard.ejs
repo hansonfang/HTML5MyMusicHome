@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">
+        我的音乐小屋
+    </a>
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-2">
+            <li class="nav-item ">
+
+                <a class="nav-link" href="/">发现音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mymusic">我的音乐</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">小站留言</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">联系我们</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0 mr-lg-5">
+        <input id="searchSongInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <% if(!user){ %>
+    <div class="nav-item">
+        <button class="loginBtn btn btn-success" type="button" data-toggle="modal">
+            登录
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="signUpBtn" class="btn btn-outline-info" type="button" data-toggle="modal"
+                data-target="#signupModal">注册
+        </button>
+    </div>
+    <% }else { %>
+    <div class="nav-item">
+        <span class="text-white">欢迎 <%= user.username %>!</span>
+    </div>
+    <% } %>
+</nav>
+
+<div class="container mr-top-2">
+    <div id="messageContainer" class="card">
+        <div class="card-body">
+            <textarea class="form-control" id="messageInput" title="" rows="3" maxlength="200"
+                      placeholder="100个中文字符以内"></textarea>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <blockquote class="blockquote mb-0">
+                <footer class="blockquote-footer">赠人玫瑰,手有余香</footer>
+            </blockquote>
+            <button id="commit" class="btn btn-outline-info">确定</button>
+        </div>
+    </div>
+    <div id="messageArea" class="card-columns mr-top-2">
+        <% messages.forEach(function (message) {%>
+        <div class="card">
+            <div class="card-body">
+                <%let username=message.leaveusername;if(message.leaveuserid===-1){username="匿名"}%>
+                <h4 class="card-title text-success"><%= username %><small class="pull-right text-secondary">id:<%=message.leaveuserid %></small></h4>
+                <p class="card-text"><%=message.message%></p>
+                <p class="card-text">
+                    <small class="text-muted"><%=message.messageTime %></small>
+                </p>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</div>
+
+<div class="mb-footer"></div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<script>
+    $("#commit").click(function () {
+        const message = $("#messageInput").val();
+        $.ajax({
+            url: "/message",
+            type: "post",
+            data: {
+                message: message
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result === "fail") {
+                    console.log("失败");
+                } else if (data.result === "success") {
+                    $("#messageArea").prepend(`<div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-success">${data.message.username}<small class="pull-right text-secondary">id:${data.message.userid}</small></h4>
+                <p class="card-text">${data.message.message}</p>
+                <p class="card-text">
+                    <small class="text-muted">${data.message.sendTime}</small>
+                </p>
+            </div>
+        </div>`)
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+        我的音乐小屋
+    </a>
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-2">
+            <li class="nav-item">
+
+                <a class="nav-link" href="/">发现音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mymusic">我的音乐</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/messageboard">小站留言</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">联系我们</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0 mr-lg-5">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</nav>
+
+<div class="container-fluid" style="height: 100%">
+    <div class="row" style="margin-top:8%;">
+        <div class="col"></div>
+        <div class="col d-flex justify-content-center" style="min-width: 26rem;">
+
+            <div class="card-body card border rounded">
+                <div class="card-title">登录</div>
+                <form>
+                    <div class="form-group row">
+                        <label for="loginUsername" class="text-right col-form-label col-sm-3">用户名</label>
+                        <div class="col-sm-8 input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-o fa-fw"></i>
+                            </span>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="输入用户名">
+                        </div>
+                        <small id="loginUsernameHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group row">
+
+                        <label for="loginPassword" class="text-right col-form-label col-sm-3">密码</label>
+                        <div class="col-sm-8">
+                            <div class="input-group"><span class="input-group-addon">
+                                <i class="fa fa-lock fa-fw"></i>
+                            </span>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="密码">
+                            </div>
+                            <small id="loginPasswordHelpBlock" class="form-text text-danger">
+
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-check text-center">
+                        <label class="custom-control custom-checkbox">
+                            <input id="loginCheckRememberMe" type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">记住我</span>
+                        </label>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div id="info" class="alert text-left w-75"></div>
+                    </div>
+                    <div class="text-center">
+                        <button id="loginBtnSubmit" type="button" class="btn btn-primary">&nbsp;确定&nbsp;</button>
+                        <button id="tosignupBtn" type="button" class="btn btn-info">注册</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<div class="mb-footer"></div>
+<script src="../assets/js/jquery.min.js"></script>
+<script>
+    var $loginBtn=$("#loginBtn");
+    var $loginUsername=$("#loginUsername");
+    var $loginPassword=$("#loginPassword");
+    var loginCheckRememberMe=document.getElementById("loginCheckRememberMe");
+    var $loginPasswordHelpBlock=$("#loginPasswordHelpBlock");
+    var $loginBtnSubmit=$("#loginBtnSubmit");
+    const $info=$("#info");
+    //验证密码字母与数字的组合
+    function validatePassword(str) {
+        var regNumber=/\d+/;
+        var regString=/[a-zA-Z]+/;
+        var matAlpha = regNumber.test(str);
+        var matNum=regString.test(str);
+        return matNum&&matAlpha;
+    }
+
+    $loginBtnSubmit.click(function () {
+
+        if(validatePassword($loginPassword.val())){
+            $loginPasswordHelpBlock.text("");
+            $.ajax({
+                url:"/login",
+                type:"post",
+                data:{username:$loginUsername.val(),password:$loginPassword.val(),checked:loginCheckRememberMe.checked},
+                success:function (data) {
+                    if(data.result==="fail"){
+                        $info.addClass("alert-danger").text(data.info);
+                    }else if(data.result==="success"){
+                        $info.removeClass("alert-danger").addClass("alert-success").text("登录成功");
+                        window.location="/mymusic";
+                    }
+                }
+            })
+        }else{
+            $loginPasswordHelpBlock.text("密码格式不正确");
+        }
+    });
+
+    $("#tosignupBtn").click(function () {
+        window.location="/signup";
+    })
+</script>
+</body>
+</html>

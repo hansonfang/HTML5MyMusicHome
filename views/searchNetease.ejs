@@ -43,8 +43,9 @@
             <i class="fa fa-search"></i>
         </button>
     </form>
+    <% if(!user){ %>
     <div class="nav-item">
-        <button  class="loginBtn btn btn-success" type="button" data-toggle="modal">
+        <button class="loginBtn btn btn-success" type="button" data-toggle="modal">
             登录
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -52,7 +53,11 @@
                 data-target="#signupModal">注册
         </button>
     </div>
-
+    <% }else { %>
+    <div class="nav-item">
+        <span class="text-white">欢迎 <%= user.username %>!</span>
+    </div>
+    <% } %>
 </nav>
 
 

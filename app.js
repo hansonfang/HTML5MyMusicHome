@@ -3,13 +3,13 @@ const app=express();
 const ejs=require("ejs");
 const cors = require('cors');
 const bodyParser=require("body-parser");
-// const morgan=require("morgan");
+const morgan=require("morgan");
 const flash=require("connect-flash");
 const session=require("express-session");
 const passport=require("passport");
 require("./module/config/passport")(passport);//配置passport
 
-// app.use(morgan("dev"));
+app.use(morgan("tiny"));
 
 app.set("views","./views");
 app.set("view engine","ejs");

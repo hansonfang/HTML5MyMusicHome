@@ -264,7 +264,7 @@ module.exports = function (app, passport) {
     router.get("/searchkugou", (req, res) => {
         searchSongs.searchOnKugou(req.query.name, function (value) {
             let data = JSON.parse(value);
-            res.render("searchKugou", {data: data, title: decodeURI(req.query.name)});
+            res.render("searchKugou", {data: data, title: decodeURI(req.query.name),user:req.user});
         });
 
         // res.end();
@@ -272,13 +272,13 @@ module.exports = function (app, passport) {
     router.get("/searchnetease", (req, res) => {
         searchSongs.searchOnNetease(req.query.name, function (value) {
             let data = JSON.parse(value);
-            res.render("searchNetease", {data: data, title: decodeURI(req.query.name)});
+            res.render("searchNetease", {data: data, title: decodeURI(req.query.name),user:req.user});
         })
     });
     router.get("/searchqq", (req, res) => {
         searchSongs.searchOnQQmusic(req.query.name, function (value) {
             let data = value;
-            res.render("searchqqmusic", {data, data, title: req.query.name});
+            res.render("searchqqmusic", {data, data, title: req.query.name,user:req.user});
         });
     })
     router.post("/getMusicURL", (req, res) => {

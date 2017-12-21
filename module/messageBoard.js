@@ -24,13 +24,17 @@ const addMessage = function (body, callback) {
     })
 };
 const retriveMessage = function (callback) {
-    connection.query(`SELECT * FROM (SELECT * FROM remarks ORDER BY id DESC LIMIT 20) sub`, [], function (err, result, value) {
-        if (err) {
-            console.log(err);
-            throw err;
-        }
-        callback(result);
-    })
+    try {
+        connection.query(`SELECT * FROM (SELECT * FROM remarks ORDER BY id DESC LIMIT 20) sub`, [], function (err, result, value) {
+            if (err) {
+                console.log(err);
+            }else
+                callback(result);
+        })
+    }catch (e){
+        console.error(e)
+    }
+
 };
 module.exports = {
     addMessage,

@@ -86,7 +86,7 @@ let $playbarSubTitle = $(".wrap .sub-title");
 let $timeEndIndicator = $("#duration");
 
 $kugouli.click(function () {
-    let hash = $(this).children(".hash").text();
+    let hash = $(this).children(".id").text();
     // let musicURL = `http://www.kugou.com/yy/index.php?r=play/getdata&hash=${hash}`;
     PlayMusic(hash, null, null, this);
 });

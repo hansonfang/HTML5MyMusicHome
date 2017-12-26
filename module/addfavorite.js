@@ -8,7 +8,9 @@ try{
     console.error(e)
 }
 
-
+setInterval(function () {
+    connection.query(`use ${dbconfig.database}`);
+}, 10000);
 module.exports = function (req, callback) {
     connection.query("INSERT INTO userandsongs (userid,songid) VALUES (?,?)", [req.user.id, req.body.id], function (err, result, field) {
         if (err) {

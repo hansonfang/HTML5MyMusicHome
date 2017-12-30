@@ -1,10 +1,12 @@
 const LocalStrategy = require("passport-local").Strategy;
 const mysql = require("mysql");
 const bcrypt = require("bcrypt-nodejs");
-const dbconfig = require("./database");
+const dbconnect = require("./database").connect;
+const dbconfig=require("./database").config;
+
 let connection;
     try{
-     connection = mysql.createConnection(dbconfig.connection);
+     connection = dbconnect();
     connection.query(`use ${dbconfig.database}`);
 }catch (e){
     console.error(e)

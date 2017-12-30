@@ -1,9 +1,10 @@
-const mysql=require("mysql");
-const dbconfig = require("./config/database");
+// const mysql=require("mysql");
+const dbconnect = require("./config/database").connect;
+const dbconfig=require("./config/database").config;
 const bcrypt=require("bcrypt-nodejs");
 let connection;
 try{
-    connection = mysql.createConnection(dbconfig.connection);
+    connection = dbconnect();
     connection.query(`use ${dbconfig.database}`);
 }catch (e){
     console.error(e)
